@@ -1,0 +1,6 @@
+{
+  "name": "Dr. Maciel de Carvalho | Advocacia Criminal de Alto Padrão",
+  "description": "Escritório de advocacia criminal de alto padrão especializado em defesa criminal de urgência, tribunal do júri, Maria da Penha e recursos nos tribunais superiores.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

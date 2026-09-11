@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Code:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-display: "Cinzel", "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Fira Code", monospace;
+  
+  --color-gold-light: #F5E6C4;
+  --color-gold: #D4AF37;
+  --color-gold-dark: #AA7C11;
+  --color-obsidian: #0A0A0C;
+  --color-obsidian-light: #121216;
+  --color-obsidian-card: #18110D; /* Warm dark */
+}
+
+/* Base resets & customized selection to match luxury layout */
+::selection {
+  background-color: #D4AF37;
+  color: #0A0A0C;
+}
+
+/* Disable user-select globally to prevent copy-paste scraping */
+body, html {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  scroll-behavior: smooth;
+  background-color: #0A0A0C;
+  color: #FFFFFF;
+}
+
+/* Custom scrollbar to match the high-end design */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0C;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #AA7C11;
+}
+
+/* Anti-select state triggered by security settings */
+.no-scraping {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Subtle cinematic lighting effects */
+.radial-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, rgba(10, 10, 12, 0) 70%);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF 0%, #F5E6C4 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.gold-border-glow:hover {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+}
+
