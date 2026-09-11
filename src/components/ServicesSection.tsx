@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { LEGAL_SERVICES, OTHER_SERVICES, LegalService } from "../types";
 import { Clock, Gavel, Scale, ShieldAlert, X, CheckSquare, ShieldCheck, PhoneCall, Users, FileCheck } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
+import { asset } from "../utils/assets";
 
 interface ServicesSectionProps {
   whatsappLink: string;
@@ -251,7 +252,7 @@ export default function ServicesSection({ whatsappLink }: ServicesSectionProps) 
                     {/* Circle avatar from law image file */}
                     <div className="w-16 h-16 rounded-full overflow-hidden border border-gold/40 shrink-0 self-center shadow-[0_0_15px_rgba(212,175,55,0.1)]">
                       <img
-                        src="/file_0000000027f8720e9639722e95c699df.png"
+                        src={asset("dr_maciel_portrait.jpg")}
                         alt="Avatar Dr. Maciel de Carvalho"
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover object-top scale-105"

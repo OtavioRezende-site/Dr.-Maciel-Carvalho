@@ -1,6 +1,7 @@
 import React from "react";
 import { Scale, MapPin, Phone, Mail, ShieldCheck, HeartHandshake, EyeOff, Lock, Landmark } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
+import { asset } from "../utils/assets";
 
 interface FooterProps {
   whatsappLink: string;
@@ -27,7 +28,7 @@ export default function Footer({ whatsappLink }: FooterProps) {
         <div className="md:col-span-4 space-y-6">
           <div className="flex items-center gap-3">
             <img
-              src="/logo.png"
+              src={asset("logo.png")}
               alt="Logo Maciel de Carvalho"
               referrerPolicy="no-referrer"
               className="h-12 w-auto object-contain select-none brightness-[1.15] drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]"

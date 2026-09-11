@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import WhatsAppIcon from "./WhatsAppIcon";
 import { Shield, ChevronDown } from "lucide-react";
+import { asset } from "../utils/assets";
 
 interface HeroSectionProps {
   onExploreClick: () => void;
@@ -32,7 +33,7 @@ export default function HeroSection({ onExploreClick, whatsappLink }: HeroSectio
         playsInline
         className="absolute inset-0 w-full h-full object-cover -z-10 brightness-[0.55] opacity-80"
       >
-        <source src="/Criminal_defense_law_video_loop_202606171641.mp4" type="video/mp4" />
+        <source src={asset("Criminal_defense_law_video_loop_202606171641.mp4")} type="video/mp4" />
       </video>
 
       {/* Luxury Gradient Dark Overlay for ensuring premium contrasts */}
@@ -48,7 +49,7 @@ export default function HeroSection({ onExploreClick, whatsappLink }: HeroSectio
           className="flex flex-col items-center"
         >
           <img
-            src="/logo.png"
+            src={asset("logo.png")}
             alt="Brasão Dr. Maciel de Carvalho"
             referrerPolicy="no-referrer"
             className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain select-none mb-1.5 md:mb-2 brightness-[1.15] drop-shadow-[0_0_12px_rgba(212,175,55,0.35)]"

@@ -1,3 +1,5 @@
+import { asset } from "../utils/assets";
+
 export interface PressArticle {
   id: string;
   title: string;
@@ -36,7 +38,7 @@ export const PRESS_ARTICLES: PressArticle[] = [
     badge: "Edição Nacional de Capa",
     quote: "O talento abre portas. O trabalho derruba barreiras.",
     summary: "Em entrevista de capa exclusiva para a Lorena Magazine, o Dr. Maciel de Carvalho revisita sua trajetória inspiradora desde os 16 anos em canteiros de obras até a liderança de um renomado escritório com atuação nacional, unindo Direito, Filosofia, Teologia e Gestão Empresarial.",
-    coverImage: "/lorena_capa_2026.jpeg",
+    coverImage: asset("lorena_capa_2026.jpeg"),
     originalUrl: "https://lorena.ig.com.br/categoria/magazine/dr-maciel-de-carvalho-talento-abre-portas",
     instagramUrl: "https://www.instagram.com/p/DbbTkXZji4Q/?igsh=MXdjMnFmdDU4aDNoMg==",
     content: [
@@ -103,7 +105,7 @@ export const PRESS_ARTICLES: PressArticle[] = [
     badge: "Análise Especializada iG",
     quote: "A via administrativa permite o diálogo técnico direto com a autoridade fiscal, evitando a exposição do contribuinte a longas demandas no Poder Judiciário.",
     summary: "Reportagem especial analisando como a atuação preventiva e a profunda governança administrativa do Dr. Maciel de Carvalho revolucionam o contencioso tributário, eliminando autos de infração e resguardando o caixa corporativo.",
-    coverImage: "/lorena_capa_2026.jpeg",
+    coverImage: asset("lorena_capa_2026.jpeg"),
     originalUrl: "https://lorena.ig.com.br/categoria/magazine/dr-maciel-de-carvalho-talento-abre-portas",
     content: [
       "Em um cenário de elevada complexidade normativa, constante mutação legislativa e crescente rigor fiscalizatório, o Direito Tributário brasileiro consolidou-se como um dos ramos mais técnicos e estratégicos da advocacia contemporânea.",
@@ -159,7 +161,7 @@ export const PRESS_ARTICLES: PressArticle[] = [
     badge: "Publicação InMagazine iG",
     quote: "A chave para superar o endividamento e os passivos fiscais está na agilidade estratégica e na negociação preventiva, preservando o fluxo de caixa e a operação corporativa.",
     summary: "Reportagem no InMagazine (Portal iG) analisa a atuação revolucionária do Dr. Maciel de Carvalho no assessoramento a empresários, combinando governança bancária, captação de recursos subsidiados do Governo Federal (BNDES/FCO) e redução ágil de passivos tributários.",
-    coverImage: "/dr_maciel_portrait.jpg",
+    coverImage: asset("dr_maciel_portrait.jpg"),
     originalUrl: "https://inmagazine.ig.com.br/empreendedorismo/dr-maciel-carvalho-advogado-direito-tributario",
     content: [
       "Com uma sólida trajetória de mais de duas décadas de atuação na advocacia bancária, tributária e empresarial, o Dr. Maciel de Carvalho tornou-se uma referência nacional no assessoramento a empreendedores que buscam reestruturação financeira, superação de dívidas e conformidade fiscal sustentável.",
