@@ -7,7 +7,11 @@ export default function CookieBanner() {
 
   useEffect(() => {
     // Check if user has already accepted cookies
-    const consent = localStorage.getItem("dr_maciel_cookies_consent");
+    let consent: string | null = null;
+    try {
+      consent = localStorage.getItem("dr_maciel_cookies_consent");
+    } catch (_) {}
+
     if (!consent) {
       // Show banner with a slight delay
       const timer = setTimeout(() => {
@@ -18,12 +22,16 @@ export default function CookieBanner() {
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem("dr_maciel_cookies_consent", "accepted");
+    try {
+      localStorage.setItem("dr_maciel_cookies_consent", "accepted");
+    } catch (_) {}
     setIsVisible(false);
   };
 
   const handleDecline = () => {
-    localStorage.setItem("dr_maciel_cookies_consent", "declined");
+    try {
+      localStorage.setItem("dr_maciel_cookies_consent", "declined");
+    } catch (_) {}
     setIsVisible(false);
   };
 

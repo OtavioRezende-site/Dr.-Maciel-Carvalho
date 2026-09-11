@@ -82,12 +82,12 @@ export default function Navbar({ whatsappLink, currentPath, onNavigate }: Navbar
       <div className={`max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between transition-all duration-500 ${isScrolled ? "py-3" : "py-4"}`}>
         {/* Brand / Logo */}
         <a
-          href="/"
+          href="#/"
           onClick={(e) => handleLinkClick(e, "/")}
           className="flex items-center gap-2.5 group"
         >
           <img
-            src="/logo.png"
+            src="./logo.png"
             alt="Logo Maciel de Carvalho"
             referrerPolicy="no-referrer"
             className="h-9 sm:h-10 w-auto object-contain brightness-[1.15] drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] group-hover:scale-105 transition-transform duration-300"

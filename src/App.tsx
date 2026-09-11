@@ -27,24 +27,43 @@ export default function App() {
   // Official, high-ticket lead channel link to WhatsApp of Dr. Carvalho
   const whatsappLink = "https://api.whatsapp.com/send?phone=556182773797";
 
-  // Light-weight custom SPA router state
-  const [currentPath, setCurrentPath] = useState(() => {
-    return window.location.pathname || "/";
-  });
+  // Helper to extract clean path regardless of whether hosted at root, subfolder or with hash
+  const getCleanPath = () => {
+    if (typeof window === "undefined") return "/";
+    if (window.location.hash) {
+      const h = window.location.hash.replace(/^#\/?/, "/");
+      return h ? (h.startsWith("/") ? h : "/" + h) : "/";
+    }
+    const raw = window.location.pathname || "/";
+    // Strip repository name or subfolder if present on GitHub Pages
+    const stripped = raw
+      .replace(/^\/Dr\.-Maciel-Carvalho\/?/, "/")
+      .replace(/^\/docs\/?/, "/")
+      .replace(/\/$/, "");
+    return stripped || "/";
+  };
 
-  // Keep path state and browser history synchronized
+  // Light-weight custom SPA router state
+  const [currentPath, setCurrentPath] = useState(getCleanPath);
+
+  // Keep path state, hash and browser history synchronized
   useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname || "/");
+    const handleLocationChange = () => {
+      setCurrentPath(getCleanPath());
     };
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    window.addEventListener("popstate", handleLocationChange);
+    window.addEventListener("hashchange", handleLocationChange);
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+      window.removeEventListener("hashchange", handleLocationChange);
+    };
   }, []);
 
   // Safe and smooth navigation helper
   const navigateTo = (path: string) => {
-    window.history.pushState(null, "", path);
-    setCurrentPath(path);
+    const clean = path.startsWith("/") ? path : "/" + path;
+    window.location.hash = clean;
+    setCurrentPath(clean);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

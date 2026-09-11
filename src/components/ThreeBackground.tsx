@@ -8,23 +8,36 @@ export default function ThreeBackground() {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    
-    // Create Scene, Camera, Renderer
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0a0a0c, 0.015);
+    let renderer: THREE.WebGLRenderer | null = null;
+    let animationId: number = 0;
+    let handleMouseMove: ((event: MouseEvent) => void) | null = null;
+    let handleScroll: (() => void) | null = null;
+    let handleResize: (() => void) | null = null;
 
-    const camera = new THREE.PerspectiveCamera(
-      60,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 25;
+    try {
+      // Check WebGL availability
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "default" });
+    } catch (err) {
+      console.warn("WebGL not supported or disabled:", err);
+      return;
+    }
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
+    try {
+      // Create Scene, Camera, Renderer
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x0a0a0c, 0.015);
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        container.clientWidth / container.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 25;
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
 
     // Create 3D Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
@@ -149,7 +162,7 @@ export default function ThreeBackground() {
     let currentX = 0;
     let currentY = 0;
 
-    const handleMouseMove = (event: MouseEvent) => {
+    handleMouseMove = (event: MouseEvent) => {
       // Calculate normalized mouse positions (-1 to 1)
       targetX = (event.clientX / window.innerWidth - 0.5) * 2;
       targetY = (event.clientY / window.innerHeight - 0.5) * 2;
@@ -159,7 +172,7 @@ export default function ThreeBackground() {
 
     // Handle window scroll adjustments (zooms or moves scene)
     let targetScroll = 0;
-    const handleScroll = () => {
+    handleScroll = () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0) {
         targetScroll = window.scrollY / maxScroll;
@@ -169,7 +182,7 @@ export default function ThreeBackground() {
     window.addEventListener("scroll", handleScroll);
 
     // Handle resize
-    const handleResize = () => {
+    handleResize = () => {
       if (!container) return;
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
@@ -179,7 +192,6 @@ export default function ThreeBackground() {
     window.addEventListener("resize", handleResize);
 
     // Animation Loop
-    let animationId: number;
     const clock = new THREE.Clock();
 
     const animate = () => {
@@ -217,17 +229,23 @@ export default function ThreeBackground() {
 
     animate();
 
+    } catch (e) {
+      console.warn("Error setting up 3D scene:", e);
+      return;
+    }
+
     // Clean up
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationId);
-      if (container.contains(renderer.domElement)) {
+      if (handleMouseMove) window.removeEventListener("mousemove", handleMouseMove);
+      if (handleScroll) window.removeEventListener("scroll", handleScroll);
+      if (handleResize) window.removeEventListener("resize", handleResize);
+      if (animationId) cancelAnimationFrame(animationId);
+      if (renderer && container && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
-      scene.clear();
-      renderer.dispose();
+      try {
+        renderer?.dispose();
+      } catch (_) {}
     };
   }, []);
 

@@ -65,36 +65,11 @@
         "priceRange": "$$$$"
       }
     </script>
-    <script>
-      // Ensure trailing slash on GitHub Pages so relative paths always resolve correctly
-      if (window.location.hostname.includes("github.io")) {
-        var path = window.location.pathname;
-        if (!path.endsWith('/') && !path.split('/').pop().includes('.')) {
-          window.location.replace(path + '/' + window.location.search + window.location.hash);
-        }
-      }
-    </script>
+    <script type="module" crossorigin src="./assets/index-vlYeCJKn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-EGXiMKRD.css">
   </head>
-  <body class="bg-[#0b0b0c] text-[#f5f5f7] antialiased">
+  <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script>
-      // Fallback for GitHub Pages if served from repository root instead of /docs or GitHub Actions
-      if (window.location.hostname.includes("github.io")) {
-        window.addEventListener("DOMContentLoaded", function() {
-          setTimeout(function() {
-            var root = document.getElementById("root");
-            if (!root || root.children.length === 0) {
-              var p = window.location.pathname;
-              if (!p.includes("/docs")) {
-                var clean = p.replace(/\/$/, "");
-                window.location.replace(clean + "/docs/" + window.location.hash);
-              }
-            }
-          }, 400);
-        });
-      }
-    </script>
   </body>
 </html>
 

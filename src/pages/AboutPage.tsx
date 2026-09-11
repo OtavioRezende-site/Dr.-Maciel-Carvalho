@@ -29,7 +29,7 @@ export default function AboutPage({ onNavigate, whatsappLink }: AboutPageProps) 
             {/* Luxury Frame Container */}
             <div className="relative w-full max-w-sm aspect-[3/4] rounded-lg border border-gold/30 overflow-hidden bg-obsidian flex flex-col justify-end shadow-[0_15px_50px_rgba(0,0,0,0.8)] group hover:border-gold transition-all duration-500">
               <img
-                src="/dr_maciel_portrait.jpg"
+                src="./dr_maciel_portrait.jpg"
                 alt="Dr. Maciel de Carvalho | Advocacia Especializada"
                 referrerPolicy="no-referrer"
                 className="absolute inset-0 w-full h-full object-cover object-top bg-[#111111] transition-transform duration-500 group-hover:scale-[1.01] z-0"
