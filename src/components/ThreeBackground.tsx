@@ -8,25 +8,23 @@ export default function ThreeBackground() {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    let cleanupFn: (() => void) | undefined;
+    
+    // Create Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x0a0a0c, 0.015);
 
-    try {
-      // Create Scene, Camera, Renderer
-      const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x0a0a0c, 0.015);
+    const camera = new THREE.PerspectiveCamera(
+      60,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.z = 25;
 
-      const camera = new THREE.PerspectiveCamera(
-        60,
-        container.clientWidth / container.clientHeight,
-        0.1,
-        1000
-      );
-      camera.position.z = 25;
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "default" });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      container.appendChild(renderer.domElement);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
 
     // Create 3D Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
@@ -219,25 +217,17 @@ export default function ThreeBackground() {
 
     animate();
 
-      cleanupFn = () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("resize", handleResize);
-        cancelAnimationFrame(animationId);
-        if (container.contains(renderer.domElement)) {
-          container.removeChild(renderer.domElement);
-        }
-        scene.clear();
-        renderer.dispose();
-      };
-    } catch (err) {
-      console.warn("ThreeBackground: WebGL could not be initialized, falling back to CSS luxury dark canvas.", err);
-    }
-
+    // Clean up
     return () => {
-      if (cleanupFn) {
-        cleanupFn();
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationId);
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
       }
+      scene.clear();
+      renderer.dispose();
     };
   }, []);
 

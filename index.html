@@ -65,18 +65,6 @@
         "priceRange": "$$$$"
       }
     </script>
-
-    <!-- Automatic routing fallback for GitHub Pages root deployment -->
-    <script>
-      (function() {
-        var isGitHubPages = window.location.hostname.indexOf('github.io') !== -1;
-        var pathname = window.location.pathname;
-        if (isGitHubPages && pathname.indexOf('/docs') === -1) {
-          var cleanPath = pathname.replace(/\/$/, '');
-          window.location.replace(cleanPath + '/docs/' + window.location.search + window.location.hash);
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>
